@@ -14,7 +14,7 @@ What should be implemented?
 Your are welcome to make some suggestions.
 
 ## Implemented Features
-- Web Server using awesome [QtWebApp library](https://github.com/StefanFrings/QtWebApp) from Stefan Frinks 
+- Web Server using awesome [QtWebApp library](https://github.com/StefanFrings/QtWebApp) from Stefan Frings 
 - RESTful API
 - Web interface using [Vue.js](https://vuejs.org/) with [Vuetify Framework](https://vuetifyjs.com) (not so fancy at the moment)
 
