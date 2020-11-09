@@ -27,7 +27,7 @@ QByteArray DeviceControl::applications() const
 {
     QJsonArray array;
 
-    QList<Sailfish::Mdm::ApplicationEntry>  apps = Sailfish::Mdm::Applications().getInstalledApplications();
+    const QList<Sailfish::Mdm::ApplicationEntry> apps = Sailfish::Mdm::Applications().getInstalledApplications();
     for (const auto &app : apps) {
         const Sailfish::Mdm::PackageEntry package = app.package();
 
@@ -108,7 +108,8 @@ QByteArray DeviceControl::simInfo() const
     // sim cards
     QJsonArray sims;
     int idx{0};
-    for (const auto &state : m_simInfo->simSlotStates()) {
+    const QList<Sailfish::Mdm::SimInfo::SimState> simStates = m_simInfo->simSlotStates();
+    for (const auto &state : simStates) {
         QJsonObject sim;
         sim.insert(QStringLiteral("card_identifier"), state.cardIdentifier);
         sim.insert(QStringLiteral("data_sim"), state.dataSim);
@@ -139,25 +140,29 @@ QByteArray DeviceControl::simInfo() const
 
     // other
     QJsonArray imeis;
-    for (const auto &info : m_simInfo->imeiCodes()) {
+    const QList<Sailfish::Mdm::SimInfo::SlotInfo> imeiInfos = m_simInfo->imeiCodes();
+    for (const auto &info : imeiInfos) {
         imeis.append(info.value);
     }
     info.insert(QStringLiteral("IMEIS"), imeis);
 
     QJsonArray imsis;
-    for (const auto &info : m_simInfo->subscriberIdentities()) {
+    const QList<Sailfish::Mdm::SimInfo::SlotInfo> imsiInfos = m_simInfo->subscriberIdentities();
+    for (const auto &info : imsiInfos) {
         imsis.append(info.value);
     }
     info.insert(QStringLiteral("IMSIS"), imsis);
 
     QJsonArray iccids;
-    for (const auto &info : m_simInfo->cardIdentifier()) {
+    const QList<Sailfish::Mdm::SimInfo::SlotInfo> iccidInfos = m_simInfo->cardIdentifier();
+    for (const auto &info : iccidInfos) {
         iccids.append(info.value);
     }
     info.insert(QStringLiteral("ICCIDS"), iccids);
 
     QJsonArray ssns;
-    for (const auto &info : m_simInfo->subscriberNumbers()) {
+    const QList<Sailfish::Mdm::SimInfo::SlotInfo> ssnsInfos = m_simInfo->subscriberNumbers();
+    for (const auto &info : ssnsInfos) {
         ssns.append(info.value);
     }
     info.insert(QStringLiteral("SNNS"), ssns);

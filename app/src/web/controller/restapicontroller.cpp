@@ -43,7 +43,7 @@ void RestApiController::service(HttpRequest &request, HttpResponse &response)
     } else if (path == "/api/update") {
         response.write(g_deviceControl->softwareUpdate());
     } else {
-        response.write("{\"error\":\"not found\"}");
+        response.write(R"({"error":"not found"})");
     }
 
 }

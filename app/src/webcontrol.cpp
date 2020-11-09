@@ -21,8 +21,8 @@ WebControl::WebControl(QObject *parent) :
     // create default settings file on first start
     QFile file(QSettings().fileName());
 
-    if (!file.exists())
-        writeSettings();
+    if (!file.exists()) {
+        writeSettings(); }
 
     readSettings();
 
@@ -49,7 +49,8 @@ void WebControl::updateWebUrl()
     QString ip;
 
     const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
-    for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
+    const QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
+    for (const QHostAddress &address: addresses) {
         if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost) {
              ip = address.toString();
              break;
@@ -111,8 +112,8 @@ quint32 WebControl::readTimeout() const
 
 void WebControl::setActive(bool active)
 {
-    if (m_active == active)
-        return;
+    if (m_active == active) {
+        return; }
 
     m_active = active;
     emit activeChanged(m_active);
@@ -128,8 +129,8 @@ void WebControl::setActive(bool active)
 
 void WebControl::setWebUrl(const QString &url)
 {
-    if (m_webUrl == url)
-        return;
+    if (m_webUrl == url) {
+        return; }
 
     m_webUrl = url;
     emit webUrlChanged(m_webUrl);
@@ -137,8 +138,8 @@ void WebControl::setWebUrl(const QString &url)
 
 void WebControl::setCleanupInterval(quint32 interval)
 {
-    if (m_cleanupInterval == interval)
-        return;
+    if (m_cleanupInterval == interval) {
+        return; }
 
     m_cleanupInterval = interval;
     emit cleanupIntervalChanged(m_cleanupInterval);
@@ -146,8 +147,8 @@ void WebControl::setCleanupInterval(quint32 interval)
 
 void WebControl::setHost(const QString &host)
 {
-    if (m_host == host)
-        return;
+    if (m_host == host) {
+        return; }
 
     m_host = host;
     emit hostChanged(m_host);
@@ -155,8 +156,8 @@ void WebControl::setHost(const QString &host)
 
 void WebControl::setMaxMultiPartSize(quint32 size)
 {
-    if (m_maxMultiPartSize == size)
-        return;
+    if (m_maxMultiPartSize == size) {
+        return; }
 
     m_maxMultiPartSize = size;
     emit maxMultiPartSizeChanged(m_maxMultiPartSize);
@@ -164,8 +165,8 @@ void WebControl::setMaxMultiPartSize(quint32 size)
 
 void WebControl::setMaxRequestSize(quint32 size)
 {
-    if (m_maxRequestSize == size)
-        return;
+    if (m_maxRequestSize == size) {
+        return; }
 
     m_maxRequestSize = size;
     emit maxRequestSizeChanged(m_maxRequestSize);
@@ -173,8 +174,8 @@ void WebControl::setMaxRequestSize(quint32 size)
 
 void WebControl::setMaxThreads(quint8 threads)
 {
-    if (m_maxThreads == threads)
-        return;
+    if (m_maxThreads == threads) {
+        return; }
 
     m_maxThreads = threads;
     emit maxThreadsChanged(m_maxThreads);
@@ -182,8 +183,8 @@ void WebControl::setMaxThreads(quint8 threads)
 
 void WebControl::setMinThreads(quint8 threads)
 {
-    if (m_minThreads == threads)
-        return;
+    if (m_minThreads == threads) {
+        return; }
 
     m_minThreads = threads;
     emit minThreadsChanged(m_minThreads);
@@ -191,8 +192,8 @@ void WebControl::setMinThreads(quint8 threads)
 
 void WebControl::setPort(quint16 port)
 {
-    if (m_port == port)
-        return;
+    if (m_port == port) {
+        return; }
 
     m_port = port;
     emit portChanged(m_port);
@@ -200,8 +201,8 @@ void WebControl::setPort(quint16 port)
 
 void WebControl::setReadTimeout(quint32 timeout)
 {
-    if (m_readTimeout == timeout)
-        return;
+    if (m_readTimeout == timeout) {
+        return; }
 
     m_readTimeout = timeout;
     emit readTimeoutChanged(m_readTimeout);

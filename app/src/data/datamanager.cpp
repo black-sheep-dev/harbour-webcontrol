@@ -23,8 +23,8 @@ QByteArray DataManager::contacts() const
 
     const QList<QtContacts::QContact> contacts = m_contactManager->contacts();
     for (const auto &contact : contacts) {
-        if (contact.isEmpty())
-            continue;
+        if (contact.isEmpty()) {
+            continue; }
 
         QJsonObject obj;
         obj.insert(QStringLiteral("id"), contact.id().toString());

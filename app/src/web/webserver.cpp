@@ -18,17 +18,17 @@ WebServer::WebServer(QObject *parent) :
 void WebServer::start()
 {
     // static file controller
-    QSettings* fileSettings = new QSettings(this);
+    auto* fileSettings = new QSettings(this);
     fileSettings->beginGroup(QStringLiteral("files"));
     g_staticFileController = new StaticFileController(fileSettings, this);
 
     // Configure template cache
-    QSettings* templateSettings=new QSettings(this);
+    auto* templateSettings=new QSettings(this);
     templateSettings->beginGroup(QStringLiteral("templates"));
     g_templateCache = new TemplateCache(templateSettings, this);
 
     // HTTP server
-    QSettings* listenerSettings = new QSettings(this);
+    auto* listenerSettings = new QSettings(this);
     listenerSettings->beginGroup(QStringLiteral("listener"));
 
     m_listener = new HttpListener(listenerSettings, new RequestMapper(this), this);

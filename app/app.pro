@@ -19,6 +19,8 @@ DEFINES += APP_TARGET=\\\"$$TARGET\\\"
 
 QT += dbus
 
+CONFIG += c++14
+
 CONFIG += sailfishapp
 PKGCONFIG += \
     sailfishmdm \
@@ -64,8 +66,8 @@ TRANSLATIONS += \
 RESOURCES += \
     ressources.qrc
 
-include(../QtWebApp/httpserver/httpserver.pri)
-include(../QtWebApp/templateengine/templateengine.pri)
+include(../QtWebApp/QtWebApp/httpserver/httpserver.pri)
+include(../QtWebApp/QtWebApp/templateengine/templateengine.pri)
 
 HEADERS += \
     src/data/datamanager.h \
