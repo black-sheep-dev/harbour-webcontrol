@@ -27,6 +27,7 @@ Your are welcome to make some suggestions.
 - Feature requests
 
 ## Translations
+- Chinese (thanks to dashinfrantry)
 - English
 - German
 
