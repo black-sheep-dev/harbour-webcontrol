@@ -5,12 +5,16 @@
 #include <QSettings>
 #include <QStandardPaths>
 
+#include "data/gobaldata.h"
 #include "device/globaldevice.h"
 
 WebControl::WebControl(QObject *parent) :
     QObject(parent),
     m_server(new WebServer(this))
 {
+    // global data manager
+    g_dataManager = new DataManager(this);
+
     // global device control
     g_deviceControl = new DeviceControl(this);
 

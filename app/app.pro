@@ -10,17 +10,24 @@
 #   - translation filenames have to be changed
 
 # VERSION
-VERSION = 0.0.1
+VERSION = 0.0.2
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 # The name of your application
 TARGET = harbour-webcontrol
 DEFINES += APP_TARGET=\\\"$$TARGET\\\"
 
+QT += dbus
+
 CONFIG += sailfishapp
-PKGCONFIG += sailfishmdm
+PKGCONFIG += \
+    sailfishmdm \
+    TelepathyQt5 \
+    Qt5Contacts
 
 SOURCES += src/harbour-webcontrol.cpp \
+    src/data/datamanager.cpp \
+    src/data/gobaldata.cpp \
     src/device/devicecontrol.cpp \
     src/device/globaldevice.cpp \
     src/web/controller/restapicontroller.cpp \
@@ -61,8 +68,11 @@ include(../QtWebApp/httpserver/httpserver.pri)
 include(../QtWebApp/templateengine/templateengine.pri)
 
 HEADERS += \
+    src/data/datamanager.h \
+    src/data/gobaldata.h \
     src/device/devicecontrol.h \
     src/device/globaldevice.h \
+    src/tools/imagetools.h \
     src/web/controller/restapicontroller.h \
     src/web/globalweb.h \
     src/web/requestmapper.h \

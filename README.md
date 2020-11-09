@@ -18,12 +18,24 @@ Your are welcome to make some suggestions.
 - RESTful API
 - Web interface using [Vue.js](https://vuejs.org/) with [Vuetify Framework](https://vuetifyjs.com) (not so fancy at the moment)
 
-## Planned Features
+#### Web Interface Features
+- Show SIM card(s) info
+- Show device info
+- Battery indicator
+- Device lock indicator
+- Show installed apps
+- Show phone contacts
+
+## Planned / Requested Features
 
 - Provide whole functionality of the Sailfish MDM Framework over the web interface
 - User management and authentication (mandatory for controlling anything)
 - JWT authentication for RESTful API (mandatory for controlling anything)
 - More Sailfish OS look & feel for the web interface
+- File browser
+- Media viewer
+- Notifications
+- SMS
 - Feature requests
 
 ## Translations
@@ -34,9 +46,12 @@ Your are welcome to make some suggestions.
 ## RESTful API
 ### Available endpoints
 - /api (GET)
+- /api/apps (GET)
 - /api/batteryinfo (GET)
-- /api/deviceinfo (GET)
+- /api/device/info (GET)
+- /api/device/status (GET)
 - /api/siminfo (GET)
+- /api/update (GET)
 
 ## Donations
 

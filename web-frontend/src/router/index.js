@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import About from  '@/pages/About.vue'
+import AppList from '@/pages/AppList.vue'
+import ContactList from '@/pages/ContactList.vue'
 import DeviceInfo from '@/pages/DeviceInfo.vue'
 import Overview from '@/pages/Overview.vue'
 import SimInfo from '@/pages/SimInfo.vue'
@@ -16,6 +18,22 @@ const routes = [
       layout: "dashboard",
     },
     component: Overview
+  },
+  {
+    path: '/contacts',
+    name: 'Contacts',
+    meta: { 
+      layout: "dashboard",
+    },
+    component: ContactList
+  },
+  {
+    path: '/apps',
+    name: 'Apps',
+    meta: { 
+      layout: "dashboard",
+    },
+    component: AppList
   },
   {
     path: '/deviceinfo',

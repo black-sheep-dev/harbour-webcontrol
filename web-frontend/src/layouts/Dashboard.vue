@@ -13,6 +13,22 @@
 					<v-list-item-title>{{ $t('menu.overview') }}</v-list-item-title>
 				</v-list-item-content>
 			</v-list-item>
+			<v-list-item link to="/contacts">
+				<v-list-item-action>
+					<v-icon>mdi-contacts</v-icon>
+				</v-list-item-action>
+				<v-list-item-content>
+					<v-list-item-title>{{ $t('menu.contacts') }}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+			<v-list-item link to="/apps">
+				<v-list-item-action>
+					<v-icon>mdi-package</v-icon>
+				</v-list-item-action>
+				<v-list-item-content>
+					<v-list-item-title>{{ $t('menu.apps') }}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
 			<v-list-item link to="/deviceinfo">
 				<v-list-item-action>
 					<v-icon>mdi-cellphone</v-icon>
@@ -56,16 +72,17 @@
 
       <v-toolbar-title>Sailfish OS Web Control</v-toolbar-title>
       <v-spacer></v-spacer>
+      <device-lock-indicator class="mr-2"/>
       <battery-indicator />
     </v-app-bar>
     <v-main>
       <v-container fluid>
-				<transition 
-					name="fade"
-					mode="out-in">
-					<slot />
-				</transition>
-			</v-container>
+			<transition 
+				name="fade"
+				mode="out-in">
+				<slot />
+			</transition>
+		</v-container>
     </v-main>
     <v-footer app :absolute="false">
 		<span>&copy; {{ year() }}, Black Sheep</span>
@@ -75,11 +92,13 @@
 
 <script>
 	import BatteryIndicator from '@/components/BatteryIndicator'
+	import DeviceLockIndicator from '@/components/DeviceLockIndicator'
 
 	export default {
 		data: () => ({ drawer: null }),
 		components: {
-			BatteryIndicator
+			BatteryIndicator,
+			DeviceLockIndicator
 		},
 		methods: {
 			year: function() {

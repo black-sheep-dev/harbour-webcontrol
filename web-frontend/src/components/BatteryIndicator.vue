@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-icon>{{ icon }}</v-icon>
-		<span>{{ batteryinfo.charge_percentage }}%</span>
+		<span>{{ devicestatus.battery.charge_percentage }}%</span>
 	</div>
 </template>
 
@@ -12,30 +12,18 @@
 		name: 'battery-indicator',
 		data: function () {
 			return {
-				icon: 'mdi-battery',
-				interval: '',
+				icon: 'mdi-battery'
 			}
 		},
 		beforeMount () {
-			this.refresh();
-			this.interval = setInterval(() => {
-				this.refresh();
-			}, 5000);
+			this.updateIcon();
 		},
 		methods: {
-			refresh: function () {
-				this.$store.dispatch('loadBatteryInfo')
-					// eslint-disable-next-line
-					.then(response => {
-						this.updateIcon();
-					})
-			},
 			updateIcon() {
-				if (this.batteryinfo.charger_status === 1) {
+				if (this.devicestatus.battery.charger_status === 1) {
 					this.icon = 'mdi-battery-charging';
 				} else {
-					var count = Math.round(this.batteryinfo.charge_percentage / 10 - 0.5) * 10;
-					console.log(count);
+					var count = Math.round(this.devicestatus.battery.charge_percentage / 10 - 0.5) * 10;
 
 					if (count < 100) {
 						this.icon = 'mdi-battery-' + count;
@@ -46,8 +34,13 @@
 				}
 			}
 		},
+		watch: {
+			devicestatus: function () {
+				this.updateIcon();
+			}
+		},
 		computed: mapState([
-			'batteryinfo'
+			'devicestatus'
 		])
 	}
 </script>

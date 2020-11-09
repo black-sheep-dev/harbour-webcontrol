@@ -5,6 +5,7 @@
 
 #include "../globalweb.h"
 
+
 class RestApiController : public HttpRequestHandler
 {
     Q_OBJECT

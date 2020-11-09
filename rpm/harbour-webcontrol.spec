@@ -9,7 +9,7 @@ Name:       harbour-webcontrol
 # << macros
 
 Summary:    Web Control
-Version:    0.0.1
+Version:    0.0.2
 Release:    1
 Group:      Qt/Qt
 License:    MIT
@@ -21,6 +21,9 @@ BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5DBus)
+BuildRequires:  pkgconfig(TelepathyQt5)
+BuildRequires:  pkgconfig(Qt5Contacts)
 BuildRequires:  desktop-file-utils
 
 %description

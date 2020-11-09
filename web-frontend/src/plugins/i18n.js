@@ -25,6 +25,8 @@ export const i18n = new VueI18n({
 			'false': 'false',
 			'menu': {
 				'about': 'About',
+				'apps': 'Applications',
+				'contacts': 'Contacts',
 				'deviceinfo': 'Device Info',
 				'overview': 'Overview',
 				'siminfo': 'Sim Info',
@@ -61,6 +63,8 @@ export const i18n = new VueI18n({
 			},
 			'menu': {
 				'about': 'Über',
+				'apps': 'Anwendungen',
+				'contacts': 'Kontakte',
 				'deviceinfo': "Geräte Info",
 				'overview': 'Übersicht',
 				'siminfo': 'Sim Info',
