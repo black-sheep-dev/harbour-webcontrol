@@ -32,6 +32,8 @@ SOURCES += src/harbour-webcontrol.cpp \
     src/data/gobaldata.cpp \
     src/device/devicecontrol.cpp \
     src/device/globaldevice.cpp \
+    src/tools/globaltools.cpp \
+    src/tools/imagecache.cpp \
     src/web/controller/restapicontroller.cpp \
     src/web/globalweb.cpp \
     src/web/requestmapper.cpp \
@@ -74,6 +76,8 @@ HEADERS += \
     src/data/gobaldata.h \
     src/device/devicecontrol.h \
     src/device/globaldevice.h \
+    src/tools/globaltools.h \
+    src/tools/imagecache.h \
     src/tools/imagetools.h \
     src/web/controller/restapicontroller.h \
     src/web/globalweb.h \

@@ -7,11 +7,15 @@
 
 #include "data/gobaldata.h"
 #include "device/globaldevice.h"
+#include "tools/globaltools.h"
 
 WebControl::WebControl(QObject *parent) :
     QObject(parent),
     m_server(new WebServer(this))
 {
+    // global image cache
+    g_imageCache = new ImageCache(this);
+
     // global data manager
     g_dataManager = new DataManager(this);
 
@@ -19,10 +23,7 @@ WebControl::WebControl(QObject *parent) :
     g_deviceControl = new DeviceControl(this);
 
     // create default settings file on first start
-    QFile file(QSettings().fileName());
-
-    if (!file.exists()) {
-        writeSettings(); }
+    initSettings();
 
     readSettings();
 
@@ -208,6 +209,57 @@ void WebControl::setReadTimeout(quint32 timeout)
     emit readTimeoutChanged(m_readTimeout);
 }
 
+void WebControl::initSettings()
+{
+    QSettings settings;
+
+    if (!settings.childGroups().contains(QLatin1String("cache"))) {
+        settings.beginGroup(QStringLiteral("cache"));
+        settings.setValue(QStringLiteral("cacheSize"), 1000000);
+        settings.setValue(QStringLiteral("cacheTime"), 60000);
+        settings.setValue(QStringLiteral("encoding"), QStringLiteral("UTF-8"));
+        settings.setValue(QStringLiteral("maxAge"), 90000);
+        settings.setValue(QStringLiteral("maxCachedFileSize"), 65536);
+        settings.setValue(QStringLiteral("path"), LOCAL_CACHE_PATH);
+        settings.endGroup();
+    }
+
+    if (!settings.childGroups().contains(QLatin1String("files"))) {
+        settings.beginGroup(QStringLiteral("files"));
+        settings.setValue(QStringLiteral("cacheSize"), 1000000);
+        settings.setValue(QStringLiteral("cacheTime"), 60000);
+        settings.setValue(QStringLiteral("encoding"), QStringLiteral("UTF-8"));
+        settings.setValue(QStringLiteral("maxAge"), 90000);
+        settings.setValue(QStringLiteral("maxCachedFileSize"), 65536);
+        settings.setValue(QStringLiteral("path"), QStringLiteral("/usr/share/") + APP_TARGET + QStringLiteral("/frontend/"));
+        settings.endGroup();
+    }
+
+    if (!settings.childGroups().contains(QLatin1String("listener"))) {
+        settings.beginGroup(QStringLiteral("listener"));
+        settings.setValue(QStringLiteral("host"), m_host);
+        settings.setValue(QStringLiteral("port"), m_port);
+        settings.setValue(QStringLiteral("minThreads"), m_minThreads);
+        settings.setValue(QStringLiteral("maxThreads"), m_maxThreads);
+        settings.setValue(QStringLiteral("cleanupInterval"), m_cleanupInterval);
+        settings.setValue(QStringLiteral("readTimeout"), m_readTimeout);
+        settings.setValue(QStringLiteral("maxRequestSize"), m_maxRequestSize);
+        settings.setValue(QStringLiteral("maxMultiPartSize"), m_maxMultiPartSize);
+        settings.endGroup();
+    }
+
+
+    if (!settings.childGroups().contains(QLatin1String("templates"))) {
+        settings.beginGroup(QStringLiteral("templates"));
+        settings.setValue(QStringLiteral("cacheSize"), 1000000);
+        settings.setValue(QStringLiteral("cacheTime"), 60000);
+        settings.setValue(QStringLiteral("encoding"), QStringLiteral("UTF-8"));
+        settings.setValue(QStringLiteral("path"), QStringLiteral("/usr/share/") + APP_TARGET + QStringLiteral("/frontend/"));
+        settings.setValue(QStringLiteral("suffix"), QStringLiteral(".html"));
+        settings.endGroup();
+    }
+}
+
 void WebControl::readSettings()
 {
     QSettings settings;
@@ -225,15 +277,6 @@ void WebControl::writeSettings()
     settings.setValue(QStringLiteral("active"), m_active);
     settings.endGroup();
 
-    settings.beginGroup(QStringLiteral("files"));
-    settings.setValue(QStringLiteral("cacheSize"), 1000000);
-    settings.setValue(QStringLiteral("cacheTime"), 60000);
-    settings.setValue(QStringLiteral("encoding"), QStringLiteral("UTF-8"));
-    settings.setValue(QStringLiteral("maxAge"), 90000);
-    settings.setValue(QStringLiteral("maxCachedFileSize"), 65536);
-    settings.setValue(QStringLiteral("path"), QStringLiteral("/usr/share/") + APP_TARGET + QStringLiteral("/frontend/"));
-    settings.endGroup();
-
     settings.beginGroup(QStringLiteral("listener"));
     settings.setValue(QStringLiteral("host"), m_host);
     settings.setValue(QStringLiteral("port"), m_port);
@@ -243,13 +286,5 @@ void WebControl::writeSettings()
     settings.setValue(QStringLiteral("readTimeout"), m_readTimeout);
     settings.setValue(QStringLiteral("maxRequestSize"), m_maxRequestSize);
     settings.setValue(QStringLiteral("maxMultiPartSize"), m_maxMultiPartSize);
-    settings.endGroup();
-
-    settings.beginGroup(QStringLiteral("templates"));
-    settings.setValue(QStringLiteral("cacheSize"), 1000000);
-    settings.setValue(QStringLiteral("cacheTime"), 60000);
-    settings.setValue(QStringLiteral("encoding"), QStringLiteral("UTF-8"));
-    settings.setValue(QStringLiteral("path"), QStringLiteral("/usr/share/") + APP_TARGET + QStringLiteral("/frontend/"));
-    settings.setValue(QStringLiteral("suffix"), QStringLiteral(".html"));
     settings.endGroup();
 }

@@ -7,6 +7,7 @@
 
 using namespace stefanfrings;
 
+extern StaticFileController* g_cacheFileController;
 extern HttpSessionStore* g_sessionStore;
 extern StaticFileController* g_staticFileController;
 extern TemplateCache* g_templateCache;

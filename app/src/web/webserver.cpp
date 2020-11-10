@@ -17,6 +17,11 @@ WebServer::WebServer(QObject *parent) :
 
 void WebServer::start()
 {
+    // cache file controller
+    auto* cacheSettings = new QSettings(this);
+    cacheSettings->beginGroup(QStringLiteral("cache"));
+    g_cacheFileController = new StaticFileController(cacheSettings, this);
+
     // static file controller
     auto* fileSettings = new QSettings(this);
     fileSettings->beginGroup(QStringLiteral("files"));

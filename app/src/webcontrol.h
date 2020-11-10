@@ -78,6 +78,7 @@ public slots:
     void setReadTimeout(quint32 timeout);
 
 private:
+    void initSettings();
     void readSettings();
     void writeSettings();
 

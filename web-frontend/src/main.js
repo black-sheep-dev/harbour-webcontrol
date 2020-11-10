@@ -5,6 +5,17 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
+// base url
+let BASE_URL;
+
+if (process.env.NODE_ENV === 'development') 
+	BASE_URL = process.env.VUE_APP_ROOT_API;
+else
+	BASE_URL = window.location.protocol + '//' + window.location.hostname;
+
+Vue.prototype.$baseUrl = BASE_URL
+
+
 // i18n
 import { i18n } from '@/plugins/i18n.js';
 
@@ -43,8 +54,10 @@ new Vue({
 		}
 
 		this.refreshDeviceStatus();
+		/*
 		this.statusRefreshInterval = setInterval(() => {
 			this.refreshDeviceStatus();
 		}, 5000);
+		*/
 	},
 }).$mount('#app')

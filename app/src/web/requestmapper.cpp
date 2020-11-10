@@ -18,6 +18,12 @@ void RequestMapper::service(HttpRequest &request, HttpResponse &response)
         return;
     }
 
+    // serve cache
+    if (path.startsWith("/images")) {
+        g_cacheFileController->service(request, response);
+        return;
+    }
+
     // serve assets
     if ( path.startsWith("/css") ||
          path.startsWith("/fonts") ||
